@@ -20,8 +20,7 @@ class StockAlertSystem {
       `User ${userId} subscribed to ${stockSymbol} with condition "${condition} ${threshold}"`
     );
 
-    // 列出當前 Queue 狀態
-    this.printQueueStatus();
+    console.log(this.userSubscriptions);
   }
 
   // 更新股票價格並即時提醒
@@ -83,21 +82,6 @@ class StockAlertSystem {
     }
 
     return alertsToProcess;
-  }
-
-  // 列出 Priority Queue 中所有未處理的警報
-  printQueueStatus() {
-    const queueArray = [];
-    const tempQueue = new PriorityQueue(this.queue._comparator); // 複製 Queue
-
-    while (!this.queue.isEmpty()) {
-      const alert = this.queue.deq();
-      queueArray.push(alert);
-      tempQueue.enq(alert);
-    }
-
-    // 恢復原始 Queue 狀態
-    this.queue = tempQueue;
   }
 }
 
